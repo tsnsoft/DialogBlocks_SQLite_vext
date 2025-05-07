@@ -1,6 +1,6 @@
 // distro_db.h
-#ifndef _DB_H_
-#define _DB_H_
+#ifndef _DISTRO_DB_H_
+#define _DISTRO_DB_H_
 
 #include "wx/wx.h" // Подключение wxWidgets
 #include <sqlite3.h> // Подключение SQLite3

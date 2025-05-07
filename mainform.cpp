@@ -41,7 +41,7 @@
 IMPLEMENT_CLASS(MainForm, wxFrame)
 
 // Определение пользовательского события
-wxDEFINE_EVENT(EVT_LOAD_DATA, wxThreadEvent);
+wxDEFINE_EVENT(EVT_LOAD_DATA, wxThreadEvent); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /*
  * MainForm event table definition
@@ -50,12 +50,12 @@ wxDEFINE_EVENT(EVT_LOAD_DATA, wxThreadEvent);
 BEGIN_EVENT_TABLE(MainForm, wxFrame)
 
 ////@begin MainForm event table entries
-    EVT_TEXT( ID_TEXTCTRL_filterCtrl, MainForm::OnTEXTCTRLFilterCtrlTextUpdated )
-    EVT_LIST_ITEM_ACTIVATED( ID_LISTCTRL, MainForm::OnListctrlItemActivated )
-    EVT_BUTTON( ID_BUTTON_addBtn, MainForm::OnBUTTONAddBtnClick )
-    EVT_BUTTON( ID_BUTTON_deleteBtn, MainForm::OnBUTTONDeleteBtnClick )
-    EVT_BUTTON( ID_BUTTON_editBtn, MainForm::OnBUTTONEditBtnClick )
-    EVT_BUTTON( wxID_EXIT, MainForm::OnExitClick )
+EVT_TEXT(ID_TEXTCTRL_filterCtrl, MainForm::OnTEXTCTRLFilterCtrlTextUpdated)
+EVT_LIST_ITEM_ACTIVATED(ID_LISTCTRL, MainForm::OnListctrlItemActivated)
+EVT_BUTTON(ID_BUTTON_addBtn, MainForm::OnBUTTONAddBtnClick)
+EVT_BUTTON(ID_BUTTON_deleteBtn, MainForm::OnBUTTONDeleteBtnClick)
+EVT_BUTTON(ID_BUTTON_editBtn, MainForm::OnBUTTONEditBtnClick)
+EVT_BUTTON(wxID_EXIT, MainForm::OnExitClick)
 ////@end MainForm event table entries
 
 EVT_CUSTOM(EVT_LOAD_DATA, wxID_ANY, MainForm::OnLoadData) // Обработчик события загрузки данных 
@@ -94,15 +94,15 @@ MainForm::MainForm(wxWindow* parent, wxWindowID id, const wxString& caption, con
 bool MainForm::Create(wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style)
 {
 	////@begin MainForm creation
-    wxFrame::Create( parent, id, caption, pos, size, style );
+	wxFrame::Create(parent, id, caption, pos, size, style);
 
-    CreateControls();
-    SetIcon(GetIconResource(wxT("tsnsoft.xpm")));
-    if (GetSizer())
-    {
-        GetSizer()->SetSizeHints(this);
-    }
-    Centre();
+	CreateControls();
+	SetIcon(GetIconResource(wxT("tsnsoft.xpm")));
+	if (GetSizer())
+	{
+		GetSizer()->SetSizeHints(this);
+	}
+	Centre();
 	////@end MainForm creation
 
 	return true;
@@ -126,12 +126,12 @@ MainForm::~MainForm()
 void MainForm::Init()
 {
 	////@begin MainForm member initialisation
-    filterCtrl = NULL;
-    listCtrl = NULL;
-    addBtn = NULL;
-    deleteBtn = NULL;
-    editBtn = NULL;
-    exitBtn = NULL;
+	filterCtrl = NULL;
+	listCtrl = NULL;
+	addBtn = NULL;
+	deleteBtn = NULL;
+	editBtn = NULL;
+	exitBtn = NULL;
 	////@end MainForm member initialisation
 }
 
@@ -142,32 +142,32 @@ void MainForm::Init()
 void MainForm::CreateControls()
 {
 	////@begin MainForm content construction
-    MainForm* itemFrame1 = this;
+	MainForm* itemFrame1 = this;
 
-    wxGridBagSizer* itemGridBagSizer1 = new wxGridBagSizer(0, 0);
-    itemGridBagSizer1->SetEmptyCellSize(wxSize(10, 19));
-    itemFrame1->SetSizer(itemGridBagSizer1);
+	wxGridBagSizer* itemGridBagSizer1 = new wxGridBagSizer(0, 0);
+	itemGridBagSizer1->SetEmptyCellSize(wxSize(10, 19));
+	itemFrame1->SetSizer(itemGridBagSizer1);
 
-    wxStaticText* itemStaticText1 = new wxStaticText( itemFrame1, wxID_STATIC, wxT("Фильтр:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemGridBagSizer1->Add(itemStaticText1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 4);
+	wxStaticText* itemStaticText1 = new wxStaticText(itemFrame1, wxID_STATIC, wxT("Фильтр:"), wxDefaultPosition, wxDefaultSize, 0);
+	itemGridBagSizer1->Add(itemStaticText1, wxGBPosition(1, 2), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 4);
 
-    filterCtrl = new wxTextCtrl( itemFrame1, ID_TEXTCTRL_filterCtrl, wxEmptyString, wxDefaultPosition, wxSize(300, -1), 0 );
-    itemGridBagSizer1->Add(filterCtrl, wxGBPosition(1, 3), wxGBSpan(1, 4), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 4);
+	filterCtrl = new wxTextCtrl(itemFrame1, ID_TEXTCTRL_filterCtrl, wxEmptyString, wxDefaultPosition, wxSize(300, -1), 0);
+	itemGridBagSizer1->Add(filterCtrl, wxGBPosition(1, 3), wxGBSpan(1, 4), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 4);
 
-    listCtrl = new wxListCtrl( itemFrame1, ID_LISTCTRL, wxDefaultPosition, wxSize(450, 300), wxLC_REPORT );
-    itemGridBagSizer1->Add(listCtrl, wxGBPosition(3, 2), wxGBSpan(1, 5), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	listCtrl = new wxListCtrl(itemFrame1, ID_LISTCTRL, wxDefaultPosition, wxSize(450, 300), wxLC_REPORT);
+	itemGridBagSizer1->Add(listCtrl, wxGBPosition(3, 2), wxGBSpan(1, 5), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    addBtn = new wxButton( itemFrame1, ID_BUTTON_addBtn, wxT("Добавить запись"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemGridBagSizer1->Add(addBtn, wxGBPosition(2, 3), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	addBtn = new wxButton(itemFrame1, ID_BUTTON_addBtn, wxT("Добавить запись"), wxDefaultPosition, wxDefaultSize, 0);
+	itemGridBagSizer1->Add(addBtn, wxGBPosition(2, 3), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    deleteBtn = new wxButton( itemFrame1, ID_BUTTON_deleteBtn, wxT("Удалить запись"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemGridBagSizer1->Add(deleteBtn, wxGBPosition(2, 5), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	deleteBtn = new wxButton(itemFrame1, ID_BUTTON_deleteBtn, wxT("Удалить запись"), wxDefaultPosition, wxDefaultSize, 0);
+	itemGridBagSizer1->Add(deleteBtn, wxGBPosition(2, 5), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    editBtn = new wxButton( itemFrame1, ID_BUTTON_editBtn, wxT("Изменить запись"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemGridBagSizer1->Add(editBtn, wxGBPosition(2, 4), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	editBtn = new wxButton(itemFrame1, ID_BUTTON_editBtn, wxT("Изменить запись"), wxDefaultPosition, wxDefaultSize, 0);
+	itemGridBagSizer1->Add(editBtn, wxGBPosition(2, 4), wxGBSpan(1, 1), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    exitBtn = new wxBitmapButton( itemFrame1, wxID_EXIT, itemFrame1->GetBitmapResource(wxT("quit.xpm")), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
-    itemGridBagSizer1->Add(exitBtn, wxGBPosition(4, 5), wxGBSpan(1, 5), wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5);
+	exitBtn = new wxBitmapButton(itemFrame1, wxID_EXIT, itemFrame1->GetBitmapResource(wxT("quit.xpm")), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW);
+	itemGridBagSizer1->Add(exitBtn, wxGBPosition(4, 5), wxGBSpan(1, 5), wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
 	////@end MainForm content construction
 }
@@ -189,13 +189,13 @@ wxBitmap MainForm::GetBitmapResource(const wxString& name)
 {
 	// Bitmap retrieval
 	////@begin MainForm bitmap retrieval
-    wxUnusedVar(name);
-    if (name == wxT("quit.xpm"))
-    {
-        wxBitmap bitmap(quit_xpm);
-        return bitmap;
-    }
-    return wxNullBitmap;
+	wxUnusedVar(name);
+	if (name == wxT("quit.xpm"))
+	{
+		wxBitmap bitmap(quit_xpm);
+		return bitmap;
+	}
+	return wxNullBitmap;
 	////@end MainForm bitmap retrieval
 }
 
@@ -207,13 +207,13 @@ wxIcon MainForm::GetIconResource(const wxString& name)
 {
 	// Icon retrieval
 	////@begin MainForm icon retrieval
-    wxUnusedVar(name);
-    if (name == wxT("tsnsoft.xpm"))
-    {
-        wxIcon icon(tsnsoft_xpm);
-        return icon;
-    }
-    return wxNullIcon;
+	wxUnusedVar(name);
+	if (name == wxT("tsnsoft.xpm"))
+	{
+		wxIcon icon(tsnsoft_xpm);
+		return icon;
+	}
+	return wxNullIcon;
 	////@end MainForm icon retrieval
 }
 
@@ -231,7 +231,7 @@ void MainForm::OnLoadData(wxEvent& event)
 	wxString error = threadEvent->GetString();
 	if (!error.IsEmpty())
 	{
-		wxMessageBox(wxT("Нет переданных данных в событии загрузки данных"), wxT("Ошибка"));
+		wxMessageBox(error, wxT("Ошибка"));
 		return;
 	}
 
@@ -473,7 +473,13 @@ void MainForm::OnExitClick(wxCommandEvent& event)
  // Обработка события активации элемента списка
 void MainForm::OnListctrlItemActivated(wxListEvent& event)
 {
-	wxCommandEvent buttonEvent(wxEVT_BUTTON, ID_BUTTON_editBtn); // Создаем событие нажатия кнопки "Изменить"
+	long selectedIndex = event.GetIndex(); // Получаем индекс выделенного элемента
+	if (selectedIndex != -1) // Если элемент не выделен 
+	{
+		// Снимаем выделение со всех элементов
+		listCtrl->SetItemState(selectedIndex, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+	}
+	wxCommandEvent buttonEvent(wxEVT_BUTTON, ID_BUTTON_editBtn); // Создаем событие нажатия кнопки "Редактировать"
 	buttonEvent.SetEventObject(this); // Устанавливаем объект события
 	ProcessWindowEvent(buttonEvent); // Обрабатываем событие
 }

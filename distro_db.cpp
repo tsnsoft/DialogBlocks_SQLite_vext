@@ -207,7 +207,7 @@ bool UpdateDistribution(sqlite3* db, int id, const wxString& name, const wxStrin
 void FilterData(sqlite3* db, const wxString& filterText, wxVector<DistributionData>& data, wxString& error) {
 	data.clear(); // Очищаем вектор данных
 	sqlite3_stmt* stmt; // Подготовленный запрос
-	
+
 	// Задаем SQL-запрос для фильтрации данных
 	wxString query = wxT("SELECT id, name, founder, year FROM distributions WHERE ");
 	query += wxT("LOWER(name) LIKE ? OR ");
